@@ -1,9 +1,8 @@
-# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/rust/.devcontainer/base.Dockerfile
+FROM ianpurton/rust-fullstack-devcontainer:latest AS development
 
-# [Choice] Debian OS version (use bullseye on local arm64/Apple Silicon): buster, bullseye
-ARG VARIANT="buster"
-FROM mcr.microsoft.com/vscode/devcontainers/rust:0-${VARIANT}
+RUN sudo npm install -g wasm4
 
-# [Optional] Uncomment this section to install additional packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+RUN rustup target add wasm32-unknown-unknown
+
+ARG USERNAME=vscode
+RUN sudo mkdir -p /vscode/target && sudo chown $USERNAME:$USERNAME /vscode/target
