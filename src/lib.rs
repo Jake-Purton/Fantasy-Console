@@ -6,22 +6,25 @@ fn start () {
     trace("I've been called");
     unsafe {
         *PALETTE = [
-            0xd2e7af,
-            0x5aded9,
-            0x2979b6,
-            0x081935,
+            0xff0000,
+            0x00ff00,
+            0x0000ff,
+            0x000000,
         ];
     }
 }
-
 #[no_mangle]
 fn update () {
-    unsafe { *DRAW_COLORS = 2 }
-    rect(10, 10, 32, 32);
-    unsafe { *DRAW_COLORS = 3 }
-    rect(52, 10, 32, 32);
-    unsafe { *DRAW_COLORS = 4 }
-    rect(94, 10, 32, 32);
+    let mut colour = 1;
+    for n in 0..160 {
+        for x in 0..160{
+            colour = colour + 1;
+            if colour > 3{
+                colour = 1
+            }
+            unsafe { *DRAW_COLORS = colour }
+            rect(n, x, 1, 1);
+        }
+    }
 
-    rect(100,100,1,1)
 }
