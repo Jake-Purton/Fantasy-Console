@@ -1,6 +1,16 @@
 mod wasm4;
 use wasm4::*;
 
+pub struct Ball {
+    pub ball_x: u8,
+    pub ball_y: u8
+}
+
+static mut BALL: Ball = Ball {
+    ball_x: 0,
+    ball_y: 0
+};
+
 #[no_mangle]
 fn start() {
     trace("I've been called");
@@ -11,15 +21,7 @@ fn start() {
 
 #[no_mangle]
 fn update() {
-    let mut colour = 1;
-    for n in 0..160 {
-        for x in 0..160 {
-            colour = colour + 1;
-            if colour > 3 {
-                colour = 1
-            }
-            unsafe { *DRAW_COLORS = colour }
-            rect(n, x, 1, 1);
-        }
-    }
+    let ball = unsafe { &mut BALL };
+
+    ball.ball_y = 10;
 }
