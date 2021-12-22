@@ -1,5 +1,6 @@
 mod wasm4;
 use wasm4::*;
+use quad_rand as qrand;
 
 pub struct Ball {
     pub ball_x: i32,
@@ -20,10 +21,16 @@ fn start() {
     unsafe {
         *PALETTE = [0xfff6d3, 0xf9a875, 0xeb6b6f, 0x7c3f58];
     }
+
+    let ball = unsafe { &mut BALL };
+
+    ball.ball_x = qrand::gen_range(0, 159);
+    ball.ball_y = qrand::gen_range(0, 159);
 }
 
 #[no_mangle]
 fn update() {
+
     let ball = unsafe { &mut BALL };
 
     ball.ball_x += ball.dx as i32;
