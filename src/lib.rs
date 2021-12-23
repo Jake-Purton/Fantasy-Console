@@ -67,4 +67,5 @@ fn update() {
 
     line(ball1.ball_x, ball1.ball_y, ball2.ball_x, ball2.ball_y)
 
+    
 }
