@@ -42,11 +42,12 @@ static mut BALL2: Ball = Ball {
     dy: -3
 };
 
+
+
 #[no_mangle]
 fn start() {
-    unsafe { *DRAW_COLORS = 2 }
     unsafe {
-        *PALETTE = [0x000000, 0xffffff, 0xeb6b6f, 0x7c3f58];
+        *PALETTE = [0x000000, 0xffffff, 0x222222, 0xaaaaaa];
     }
 
 }
@@ -65,7 +66,13 @@ fn update() {
 
     // DRAWS A LINE BETWEEN THE TWO BALLS
 
+    unsafe { *DRAW_COLORS = 3 }
+    line(ball1.ball_x , ball1.ball_y - 1, ball2.ball_x - 1, ball2.ball_y);
+
+    unsafe { *DRAW_COLORS = 3 }
+    line(ball1.ball_x , ball1.ball_y + 1, ball2.ball_x, ball2.ball_y + 1);
+
+    unsafe { *DRAW_COLORS = 2 }
     line(ball1.ball_x, ball1.ball_y, ball2.ball_x, ball2.ball_y)
 
-    
 }
